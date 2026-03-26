@@ -8,6 +8,12 @@
 
     <h1>Hello {{ controller_name|custom_capitalize }}!</h1>
 
+    {% set textFirstCapitalized = "Ma première lettre est en majuscule" %}
+    <p>{{ textFirstCapitalized|custom_capitalize }}</p>
+
+    {% set textFirstNotCapitalized = "Ma première lettre est en minuscule" %}
+    <p>{{ textFirstNotCapitalized|custom_capitalize(false) }}</p>
+
     <twig:BootstrapButton class="mb-2"
         text="Bootstrap est disponible!"
         type="success" link="#" />
