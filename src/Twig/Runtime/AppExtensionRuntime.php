@@ -38,5 +38,16 @@ class AppExtensionRuntime implements RuntimeExtensionInterface
         }
 
         return $value;
+
+        /*
+        Méthode où on parcours deux cases / attention cependant à la taille du tableau
+        for($i = 0; $i < strlen($value); $i = $i + 2) {
+
+            $value[$i]      = strtoupper($value[$i]);
+            $value[$i + 1]  = strtolower($value[$i + 1]);
+        }
+
+        return $value;
+        */
     }
 }
