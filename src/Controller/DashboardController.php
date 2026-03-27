@@ -18,14 +18,4 @@ final class DashboardController extends AbstractController
             'controller_name' => 'DashboardController',
         ]);
     }
-
-    #[Route('/pokemon/{id}', name: 'app_pokemon_show')]
-    public function show(int $id): Response
-    {
-        dd($id);
-
-        return $this->render('pokemon/show.html.twig', [
-            'pokemon_id' => $id
-        ]);
-    }
 }
