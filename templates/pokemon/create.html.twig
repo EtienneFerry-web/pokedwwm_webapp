@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un Pokemon{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-6 col-lg-5">
+            <div class="card shoadow-sm">
+                <div class="card-header bg-danger text-white">
+                    Ajouter un Pokemon
+                </div>
+                <div class="card-body">
+                    <form action="{{ path('app_pokemon_create')}}" method="POST">
+                        <div class="mb-3">
+                            <label for="nom" class="form-label">Nom du Pokemon</label>
+                            <input type="text" class="form-control" id="nom" name="name" placeholder="Nom du pokemon">
+                        </div>
+                        <div class="mb-3">
+                            <label for="number" class="form-label">Numéro Pokedex national</label>
+                            <input type="number" class="form-control" id="number" name="number" placeholder="Numéro Pokedex national">
+                        </div>
+                        <button type="submit" class="btn btn-danger">Ajouter</button>
+                    </form>
+                </div>
+
+
+        </div>
+    </div>
+</div>
+{% endblock %}

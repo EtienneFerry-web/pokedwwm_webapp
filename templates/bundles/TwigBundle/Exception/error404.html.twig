@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Une erreur est survenue!{% endblock %}
+
+{% block body %}
+    <div class="d-flex justify-content-center">
+        <h1>Une erreur est survenue!</h1>
+        <a class="btn btn-primary" href="{{ path('app_dashboard') }}">Retourner au Tableau de bord</a>
+        <h1>Une erreur est survenue!</h1>
+
+        <p>Tu à fais une bétise !</p>
+        
+        <img src="{{ asset(images/Missingno.png) }}" alt=" A wild missingno appeared!">
+    </div>
+{% endblock %}
