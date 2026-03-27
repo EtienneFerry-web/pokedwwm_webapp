@@ -18,12 +18,13 @@
                 <div class="card-body">
                     <form action="{{ path('app_pokemon_create')}}" method="POST">
                         <div class="mb-3">
+                            <input type="hidden">
                             <label for="nom" class="form-label">Nom du Pokemon</label>
-                            <input type="text" class="form-control" id="nom" name="name" placeholder="Nom du pokemon">
+                            <input type="text" class="form-control" id="nom" name="name" placeholder="Nom du pokemon" required>
                         </div>
                         <div class="mb-3">
                             <label for="number" class="form-label">Numéro Pokedex national</label>
-                            <input type="number" class="form-control" id="number" name="number" placeholder="Numéro Pokedex national">
+                            <input type="number" class="form-control" id="number" name="number" placeholder="Numéro Pokedex national" required>
                         </div>
                         <button type="submit" class="btn btn-danger">Ajouter</button>
                     </form>
