@@ -49,7 +49,7 @@ final class PokemonController extends AbstractController
             ]);
         }
         
-        return $this->render('pokemon/create.html.twig', [
+        return $this->render('pokemon/form.html.twig', [
             'createForm'    => $createForm
         ]);
     }
@@ -65,15 +65,44 @@ final class PokemonController extends AbstractController
         ]);
     }
 
-    #[Route('/{id<\d+>}/update', name: 'update')]
-    public function update(Request $request, EntityManagerInterface $entityManager, Pokemon $pokemon): response
+      #[Route('/{id<\d+>}/update', name: 'update')] //< URL : /pokemon/1/update
+    public function update(Pokemon $pokemon, Request $request, EntityManagerInterface $entityManager): Response
     {
-        //On construit le formulaire de mise à jour en lui passant l'objet pokémon à mettre à jour
-        //Le formulaire va pré-remplir les champs avec les données de l'objet pokémon
+        // On construit le formulaire à partir des données de l'entité récupérée
+        // depuis l'ID présent dans l'URL
         $updateForm = $this->createForm(PokemonCreateFormType::class, $pokemon);
 
-        return $this->render('pokemon/create.html.twig', [
-            'updateForm' => $updateForm
+        $updateForm->handleRequest($request);
+
+        if($updateForm->isSubmitted() && $updateForm->isValid()) {
+
+            // L'entité provenant déjà de la base, Doctrine la connait
+            // => pas besoin de persist
+
+            $entityManager->flush();
+
+            $this->addFlash('success', "Le pokémon a bien été modifié en base");
+
+            // Redirige vers la page de détails du pokémon modifié
+            return $this->redirectToRoute('app_pokemon_show', [
+                'id' => $pokemon->getId()
+            ]);
+        }
+
+        return $this->render('pokemon/form.html.twig', [
+            'createForm'    => $updateForm
         ]);
+    }
+
+    #[Route('/{id<\d+>}/delete', name: 'delete')]
+    public function delete(Pokemon $pokemon, EntityManagerInterface $entityManager): Response
+    {        
+        $entityManager->remove($pokemon);
+        
+        $entityManager->flush();
+
+        $this->addFlash('success', "Le pokémon a bien été supprimé de la base");
+
+        return $this->redirectToRoute('app_pokemon_index');
     }
 }
