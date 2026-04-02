@@ -22,7 +22,7 @@ final class PokemonController extends AbstractController
 
     #[Route('/pokemon/create', name: 'app_pokemon_create')]
     public function create(Request $request, EntityManagerInterface $entityManager): Response
-    {
+    {/*
          if($request->isMethod('POST')){
 
                 $onError = false;//<Flag qui verifie si tout est OK
@@ -52,7 +52,8 @@ final class PokemonController extends AbstractController
                         ]);
                     
             }
-
+*/
+            
             return $this->render('pokemon/create.html.twig',[]);
         }
     }
