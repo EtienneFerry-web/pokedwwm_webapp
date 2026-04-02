@@ -64,4 +64,16 @@ final class PokemonController extends AbstractController
             'pokemon'       => $pokemon
         ]);
     }
+
+    #[Route('/{id<\d+>}/update', name: 'update')]
+    public function update(Request $request, EntityManagerInterface $entityManager, Pokemon $pokemon): response
+    {
+        //On construit le formulaire de mise à jour en lui passant l'objet pokémon à mettre à jour
+        //Le formulaire va pré-remplir les champs avec les données de l'objet pokémon
+        $updateForm = $this->createForm(PokemonCreateFormType::class, $pokemon);
+
+        return $this->render('pokemon/create.html.twig', [
+            'updateForm' => $updateForm
+        ]);
+    }
 }
