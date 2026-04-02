@@ -2,18 +2,19 @@
 
 namespace App\Entity;
 
-use App\Repository\TypeRepository;
+use App\Repository\PokemonTypeRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: TypeRepository::class)]
-class Type
+#[ORM\Entity(repositoryClass: PokemonTypeRepository::class)]
+#[ORM\Table(name: 'pokemon_types')]
+class PokemonType
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(name: 'pkt_id')]
     private ?int $id = null;
 
-    #[ORM\Column(name: 'pkt_name', length: 255)]
+    #[ORM\Column(name: 'pkt_name', length: 15)]
     private ?string $name = null;
 
     #[ORM\Column(name: 'pkt_color', length: 7)]
