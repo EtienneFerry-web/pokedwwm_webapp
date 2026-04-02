@@ -10,13 +10,13 @@ class Type
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(name: 'pkt_id')]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(name: 'pkt_name', length: 255)]
     private ?string $name = null;
 
-    #[ORM\Column(length: 7)]
+    #[ORM\Column(name: 'pkt_color', length: 7)]
     private ?string $color = null;
 
     public function getId(): ?int
