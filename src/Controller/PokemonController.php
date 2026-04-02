@@ -30,6 +30,24 @@ final class PokemonController extends AbstractController
         $objNewPokemon = new Pokemon();
 
         $createForm = $this->createForm(PokemonCreateFormType::class, $objNewPokemon);
+
+        // J'envoi les données de la requête au formulaire
+        $createForm->handleRequest($request);
+
+        // Vérifie si le formulaire est soumiii et que les données sont valides
+        if($createForm->isSubmitted() && $createForm->isValid()) {
+
+            $entityManager->persist($objNewPokemon);
+            $entityManager->flush();
+
+            // Affiche un message de succès
+            $this->addFlash('success', "Le pokémon a bien été créé en base");
+
+            // Redirige vers la page de détails du pokémon créé
+            return $this->redirectToRoute('app_pokemon_show', [
+                'id' => $objNewPokemon->getId()
+            ]);
+        }
         
         return $this->render('pokemon/create.html.twig', [
             'createForm'    => $createForm
