@@ -17,7 +17,7 @@ final class PokemonController extends AbstractController
     #[Route('/', name: 'index')]
     public function index(PokemonRepository $pokemonRepository): Response
     {
-        $arrPokemon = $pokemonRepository->findAll();
+        $arrPokemon = $pokemonRepository->findBy([], ['number' => 'ASC']);
 
         return $this->render('pokemon/index.html.twig', [
             'pokemonList' => $arrPokemon,
