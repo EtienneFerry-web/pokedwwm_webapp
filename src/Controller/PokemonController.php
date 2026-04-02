@@ -64,4 +64,33 @@ final class PokemonController extends AbstractController
             'pokemon'       => $pokemon
         ]);
     }
+
+    #[Route('/{id<\d+>}/update', name: 'update')] //< URL : /pokemon/1/update
+    public function update(Pokemon $pokemon, Request $request, EntityManagerInterface $entityManager): Response
+    {
+        // On construit le formulaire à partir des données de l'entité récupérée
+        // depuis l'ID présent dans l'URL
+        $updateForm = $this->createForm(PokemonCreateFormType::class, $pokemon);
+
+        $updateForm->handleRequest($request);
+
+        if($updateForm->isSubmitted() && $updateForm->isValid()) {
+
+            // L'entité provenant déjà de la base, Doctrine la connait
+            // => pas besoin de persist
+
+            $entityManager->flush();
+
+            $this->addFlash('success', "Le pokémon a bien été modifié en base");
+
+            // Redirige vers la page de détails du pokémon modifié
+            return $this->redirectToRoute('app_pokemon_show', [
+                'id' => $pokemon->getId()
+            ]);
+        }
+
+        return $this->render('pokemon/create.html.twig', [
+            'createForm'    => $updateForm
+        ]);
+    }
 }
